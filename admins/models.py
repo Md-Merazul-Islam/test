@@ -1,5 +1,4 @@
 from django.db import models
-from accounts.models import User
 from datetime import datetime, timedelta
 from django.db import models
 
