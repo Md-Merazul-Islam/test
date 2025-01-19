@@ -8,6 +8,49 @@ SECRET_KEY = 'django-insecure-*%5%&r0bools64sf#w+50b%@*$@i5nj3-(zbwr@03ih@*dwbx5
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500',
+    'http://127.0.0.1:5501',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://*.127.0.0.1',
+  'https://gym-class-scheduling-q6cx.vercel.app',
+    
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gym-class-scheduling-q6cx.vercel.app',
+    'https://*.127.0.0.1',
+    'http://localhost:8000',
+    'http://127.0.0.1:5500',
+    'http://127.0.0.1:5501',
+    'http://127.0.0.1:8000',
+]
+
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'PATCH',
+    'OPTIONS'
+]
 
 
 INSTALLED_APPS = [

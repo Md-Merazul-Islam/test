@@ -28,7 +28,7 @@ PASSWORD : admin1234
 # Django                     
 # django-cors-headers          
 # djangorestframework          
-# djangorestframework_simplejwt 
+# djangorestframework-simplejwt 
 # drf-yasg                     
 # inflection                    
 # packaging
