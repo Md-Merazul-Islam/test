@@ -33,14 +33,13 @@ class TrainerViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            name = request.data.get("name")
             email = request.data.get("email")  
             username = request.data.get("username")  
-            expertise = request.data.get("expertise")
+           
 
-            if not name or not email or not username or not expertise:
+            if   not email or not username :
                 return error_response(
-                    "Name, email, username, and expertise are required fields.",
+                    "Email, username are required fields.",
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
 
@@ -57,10 +56,8 @@ class TrainerViewSet(viewsets.ModelViewSet):
                 )
 
             trainer = Trainer.objects.create(
-                name=name,
                 email=email,
                 username=username,
-                expertise=expertise
             )
 
             return success_response(
