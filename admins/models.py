@@ -17,6 +17,7 @@ class ClassSchedule(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField(blank=True, null=True)
     max_trainees = models.IntegerField(default=10)
+    current_trainees = models.IntegerField(default=0, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.end_time:

@@ -134,7 +134,11 @@ class TrainerViewSet(viewsets.ModelViewSet):
 
 
 class ClassScheduleView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
+    def get_permissions(self):
+        if self.request.method in ["POST"]:  
+            return [IsAuthenticated(), IsAdmin()]
+        return [IsAuthenticated()]  
     serializer_class = ClassScheduleSerializer
 
     def get_queryset(self):

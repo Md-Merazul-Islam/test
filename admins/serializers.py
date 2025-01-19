@@ -12,7 +12,7 @@ class ClassScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ClassSchedule
-        fields = ['id', 'date', 'start_time', 'end_time', 'trainer', 'trainer_name']
+        fields = ['id', 'date', 'start_time', 'end_time', 'trainer', 'trainer_name','current_trainees']
         read_only_fields = ['end_time']  
 
     def create(self, validated_data):
