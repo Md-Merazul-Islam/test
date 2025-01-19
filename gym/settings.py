@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     
+    #deployment
+     "whitenoise.runserver_nostatic",
+   
     
     
 ]
@@ -43,6 +46,9 @@ MIDDLEWARE = [
     
        # extra
     'corsheaders.middleware.CorsMiddleware',
+    
+    #deployment
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'gym.urls'
@@ -63,16 +69,28 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gym.wsgi.application'
-
+# WSGI_APPLICATION = 'gym.wsgi.application'
+WSGI_APPLICATION = 'gym.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.miwxyxgxujersguriklg',  
+        'PASSWORD': '-*_u_4JaHnkcZnH',
+        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',
+        'PORT': '6543',
     }
 }
 
@@ -113,6 +131,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
