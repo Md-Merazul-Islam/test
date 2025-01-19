@@ -102,3 +102,4 @@ class LogoutAPIView(APIView):
             "statusCode": status.HTTP_200_OK,
             "message": "Successfully logged out"
         }, status=status.HTTP_200_OK)
+

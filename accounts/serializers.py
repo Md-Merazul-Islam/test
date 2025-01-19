@@ -11,7 +11,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # fields = ['username', 'email', 'password', 'confirm_password','role']
-        fields = ['username', 'email', 'password','confirm_password', 'role']
+        fields = ['username', 'email', 'password','confirm_password']
     
 
     def validate(self, data):
@@ -46,4 +46,4 @@ class UserLoginSerializer(serializers.Serializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name','role','phone_number','address']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name','phone_number','address']
