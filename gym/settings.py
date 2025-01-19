@@ -22,9 +22,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'accounts',
-    'gym_rooms',
+    'admins',
+    'trainers',
+    'trainees',
     'corsheaders',
     'drf_yasg',
+    
     
     
 ]
