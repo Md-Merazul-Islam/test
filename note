@@ -14,3 +14,34 @@ DATABASES = {
 admin username : admin 
 PASSWORD : admin1234
 
+
+# environ
+# pycparser
+# twilio
+# typing_extensions
+# tzdata
+# urllib3
+# yarl
+# psycopg2-binary
+# whitenoise
+# asgiref                     
+# Django                     
+# django-cors-headers          
+# djangorestframework          
+# djangorestframework_simplejwt 
+# drf-yasg                     
+# inflection                    
+# packaging
+# pip                           
+# psycopg2-binary               
+# PyJWT                         
+# python-dotenv               
+# pytz                         
+# PyYAML                        
+# setuptools                    
+# sqlparse                      
+# typing_extensions           
+# tzdata
+# uritemplate                   
+# wheel                      
+# whitenoise                 
