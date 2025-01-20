@@ -4,17 +4,17 @@ from .models import User
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ( 'username','id', 'email', 'phone_number', 'address', 'is_staff', 'is_active')  
-    list_filter = ( 'is_staff', 'is_active')  
-    search_fields = ('username', 'email', )  
+    list_display = ('username', 'id', 'email', 'phone_number', 'address', 'role', 'is_staff', 'is_active')  # Add 'role'
+    list_filter = ('role', 'is_staff', 'is_active')  # Add 'role' filter
+    search_fields = ('username', 'email')  
     ordering = ('username',)
-    
+
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ( 'phone_number', 'address')}),
+        (None, {'fields': ('phone_number', 'address', 'role')}),  # Add 'role' here
     )
-    
+
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ( 'phone_number', 'address')}),
+        (None, {'fields': ('phone_number', 'address', 'role')}),  # Add 'role' here
     )
 
 admin.site.register(User, CustomUserAdmin)

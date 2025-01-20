@@ -1,13 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserDetailSerializer, ChangeUserRoleSerializer
 from django.contrib.auth import authenticate, login, logout
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
+from rest_framework import viewsets
+from .models import User
+from .serializers import UserSerializer
+from .permissions  import IsAdmin
 
 User = get_user_model()
+
 
 class RegisterAPIView(generics.CreateAPIView):
     serializer_class = UserRegisterSerializer
@@ -33,17 +38,18 @@ class LoginAPIView(generics.GenericAPIView):
                 "message": "Validation error occurred.",
                 "errorDetails": serializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
-        # serializer.is_valid(raise_exception=True)
+
         username_or_email = serializer.validated_data['username']
         password = serializer.validated_data['password']
 
-        user = User.objects.filter(username=username_or_email).first() or User.objects.filter(email=username_or_email).first()
+        user = User.objects.filter(username=username_or_email).first(
+        ) or User.objects.filter(email=username_or_email).first()
         if user:
-            user = authenticate(request, username=user.username, password=password)
+            user = authenticate(
+                request, username=user.username, password=password)
             if user:
                 login(request, user)
 
-                # Generate JWT tokens
                 refresh = RefreshToken.for_user(user)
                 return Response({
                     "success": True,
@@ -56,13 +62,13 @@ class LoginAPIView(generics.GenericAPIView):
                         'username': user.username
                     }
                 }, status=status.HTTP_200_OK)
-                
+
             return Response({
                 "success": False,
                 "message": "Invalid credentials.",
                 "errorDetails": "Please check your username or password."
             }, status=status.HTTP_400_BAD_REQUEST)
-            
+
         return Response({
             "success": False,
             "message": "Invalid username or email.",
@@ -77,6 +83,7 @@ class ProfileAPIView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
     def get(self, request, *args, **kwargs):
         user = self.get_object()
         serializer = self.get_serializer(user)
@@ -102,3 +109,13 @@ class LogoutAPIView(APIView):
             "message": "Successfully logged out"
         }, status=status.HTTP_200_OK)
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsAdmin]  
+
+    def perform_update(self, serializer):
+        user = serializer.instance
+        if 'role' in serializer.validated_data and user.role != serializer.validated_data['role']:
+            pass
+        serializer.save()
